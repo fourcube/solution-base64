@@ -1,4 +1,4 @@
-defmodule DataService.Mixfile do
+defmodule Solution.Base64.Mixfile do
   use Mix.Project
 
   def project do

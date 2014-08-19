@@ -26,14 +26,14 @@ defmodule Solution.Base64 do
 
   ## Examples
 
-      iex> Solution.Base64.encode_string "foo"
+      iex> Solution.Base64.encode_base64 "foo"
       "Zm9v"
 
-      iex> Solution.Base64.encode_string 'bar'
+      iex> Solution.Base64.encode_base64 'bar'
       "YmFy"
 
   """
-  def encode_string(input) do    
+  def encode_base64(input) do    
     # Convert the input to a string if it is a char list
     if is_list(input) do
       input = to_string input
@@ -66,14 +66,14 @@ defmodule Solution.Base64 do
 
   ## Examples
 
-      iex> Solution.Base64.decode_string "Zm9v"
+      iex> Solution.Base64.decode_base64 "Zm9v"
       "foo"
 
-      iex> Solution.Base64.decode_string 'YmFy'
+      iex> Solution.Base64.decode_base64 'YmFy'
       "bar"
 
   """
-  def decode_string(input) do    
+  def decode_base64(input) do    
     # Convert the input to a string if it is a char list
     if is_list(input) do
       input = to_string input
@@ -115,7 +115,7 @@ defmodule Solution.Base64 do
     case decoded_bytes do
       <<x, 0, 0>> -> four_characters_to_three_bytes(chars, acc <> <<x>>)
       <<x, y, 0>> -> four_characters_to_three_bytes(chars, acc <> <<x, y>>)
-      x -> four_characters_to_three_bytes(chars, acc <> decoded_bytes)
+      x -> four_characters_to_three_bytes(chars, acc <> x)
     end     
   end
 end

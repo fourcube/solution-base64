@@ -27,41 +27,41 @@ defmodule Solution.Base64Test do
   end
 
   test "encode string to base64" do
-    assert "Zm9v" == encode_string "foo"
+    assert "Zm9v" == encode_base64 "foo"
   end
 
   test "encode string to base64 - empty" do
-    assert "" == encode_string ""
+    assert "" == encode_base64 ""
   end
 
   test "encode string to base64 - 'b'" do
-    assert "Yg" == encode_string <<98>>
+    assert "Yg" == encode_base64 <<98>>
   end
 
   test "encode string to base64 - unicode" do 
-    assert "xYI" == encode_string "ł"
+    assert "xYI" == encode_base64 "ł"
   end
 
   test "encode charlist to base64" do 
-    assert "Zm9v" == encode_string 'foo'
+    assert "Zm9v" == encode_base64 'foo'
   end
 
   test "decode base64 string - no padding" do 
-    assert "foo" == decode_string "Zm9v"
+    assert "foo" == decode_base64 "Zm9v"
   end
 
   test "decode base64 string" do 
-    assert "b" == decode_string "Yg"
+    assert "b" == decode_base64 "Yg"
   end
 
   test "decode base64 string - unicode" do
-    assert "ł" = decode_string "xYI"
+    assert "ł" = decode_base64 "xYI"
   end
 
   test "encode and decode lorem ipsum" do
     input = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    encoded = encode_string input
-    decoded = decode_string encoded
+    encoded = encode_base64 input
+    decoded = decode_base64 encoded
 
     assert decoded == input
   end

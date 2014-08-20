@@ -1,7 +1,7 @@
 solution-base64
 ===============
 
-Mix module providing base64 encoding and decoding for Elixir. It provides the functions `encode_base64` and `decode_base64`. They work on strings and char lists but always return a string.
+Mix module providing base64 encoding and decoding for Elixir. It provides the functions `encode_base64` and `decode_base64`. Both functions work on binaries, strings and char lists but always return a string.
 
 Usage
 -----

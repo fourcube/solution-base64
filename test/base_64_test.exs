@@ -34,7 +34,7 @@ defmodule Solution.Base64Test do
     assert "" == encode_base64 ""
   end
 
-  test "encode string to base64 - 'b'" do
+  test "encode binary to base64 - 'b'" do
     assert "Yg" == encode_base64 <<98>>
   end
 
@@ -44,7 +44,7 @@ defmodule Solution.Base64Test do
 
   test "encode charlist to base64" do 
     assert "Zm9v" == encode_base64 'foo'
-  end
+  end  
 
   test "decode base64 string - no padding" do 
     assert "foo" == decode_base64 "Zm9v"
@@ -52,6 +52,10 @@ defmodule Solution.Base64Test do
 
   test "decode base64 string" do 
     assert "b" == decode_base64 "Yg"
+  end
+
+  test "decode base64 binary" do 
+    assert "foo" == decode_base64 <<90, 109, 57, 118>>
   end
 
   test "decode base64 string - unicode" do

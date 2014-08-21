@@ -3,12 +3,12 @@ defmodule Solution.Base64Test do
   doctest Solution.Base64
   import Solution.Base64
 
-  test "pad_bits - size is ok" do
+  test "pad to multiple of six" do
     padded = pad_bits(<<0, 0, 0, 1>>, 6)
     assert bit_size(padded) == 36
   end
 
-  test "pad_bits - needs padding" do
+  test "pad binary" do
     padded = pad_bits(<<1, 1>>, 6)
 
     # Check the correct size
@@ -17,7 +17,7 @@ defmodule Solution.Base64Test do
     assert padded == <<1,1, 0::1, 0::1>>
   end
 
-  test "pad_bits - pad string" do
+  test "pad string" do
     padded = pad_bits("ab", 6)
     
     # Check the correct size
@@ -26,39 +26,48 @@ defmodule Solution.Base64Test do
     assert padded == <<97, 98, 0::1, 0::1>>
   end
 
-  test "encode string to base64" do
+  test "pad charlist" do
+    padded = pad_bits('ab', 6)
+    
+    # Check the correct size
+    assert bit_size(padded) == 18
+    # Check the correct value
+    assert padded == <<97, 98, 0::1, 0::1>>
+  end
+
+  test "encode foo" do
     assert "Zm9v" == encode_base64 "foo"
   end
 
-  test "encode string to base64 - empty" do
+  test "encode empty string" do
     assert "" == encode_base64 ""
   end
 
-  test "encode binary to base64 - 'b'" do
+  test "encode binary" do
     assert "Yg" == encode_base64 <<98>>
   end
 
-  test "encode string to base64 - unicode" do 
+  test "encode unicode" do 
     assert "xYI" == encode_base64 "ł"
   end
 
-  test "encode charlist to base64" do 
+  test "encode charlist" do 
     assert "Zm9v" == encode_base64 'foo'
   end  
 
-  test "decode base64 string - no padding" do 
+  test "decode without padding" do 
     assert "foo" == decode_base64 "Zm9v"
   end
 
-  test "decode base64 string" do 
+  test "decode with padding" do 
     assert "b" == decode_base64 "Yg"
   end
 
-  test "decode base64 binary" do 
+  test "decode binary" do 
     assert "foo" == decode_base64 <<90, 109, 57, 118>>
   end
 
-  test "decode base64 string - unicode" do
+  test "decode unicode" do
     assert "ł" = decode_base64 "xYI"
   end
 

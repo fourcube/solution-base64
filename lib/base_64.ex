@@ -7,12 +7,17 @@ defmodule Solution.Base64 do
       iex> Solution.Base64.pad_bits "fo", 6
       <<102, 111, 0::size(2)>>
 
-  """
+  """  
   def pad_bits(b, to_multiple_of) when rem(bit_size(b), to_multiple_of) == 0 do
       b
   end
 
-  def pad_bits(b, to_multiple_of) do    
+  def pad_bits(b, to_multiple_of) do  
+    # Convert the input to a string if it is a char list
+    if is_list(b) do
+      b = to_string b
+    end
+
     current_bits = bit_size(b)
     factor = div(current_bits, to_multiple_of)  
     remainder = (to_multiple_of * factor + to_multiple_of) - current_bits
